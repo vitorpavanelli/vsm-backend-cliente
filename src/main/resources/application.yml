@@ -1,0 +1,33 @@
+app:
+  name: crm-cliente
+  dist: dev
+
+auth:
+  server1: http://localhost:8080/api/v1/gateway/security-check
+
+logging:
+  level:
+    br.com.vsm.crm.sso: error
+    org:
+      springframework.web: error
+      hibernate:
+        SQL: error
+
+server:
+  port: 8081
+
+dev:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente_test?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+    username: vsm_crm
+    password: Vsm_Crm_Admin_1!
+
+prod:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+    username: vsm_crm
+    password: Vsm_Crm_Admin_1!
+
+spring:
+  jpa:
+    open-in-view: false
