@@ -57,7 +57,6 @@ public class MySQLDbConfig {
         properties.put("hibernate.show_sql", "false");
         properties.put("hibernate.use_sql_comments", "true");
         properties.put("hibernate.id.new_generator_mappings", "false");
-        //properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         em.setJpaPropertyMap(properties);
 
         return em;

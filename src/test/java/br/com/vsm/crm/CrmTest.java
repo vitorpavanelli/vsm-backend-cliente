@@ -65,7 +65,7 @@ public abstract class CrmTest {
 
         Cliente cliente = new Cliente();
         cliente.setId(_DEFAULT_CLIENT_ID_F);
-        cliente.setAdicionadoEm(LocalDateTime.now());
+        //cliente.setAdicionadoEm(LocalDateTime.now());
         cliente.setCpf("111.222.333-44");
         cliente.setEmail("cliente@email.com.br");
         cliente.setGenero(Genero.F);
@@ -77,7 +77,7 @@ public abstract class CrmTest {
 
         cliente = new Cliente();
         cliente.setId(_DEFAULT_CLIENT_ID_M);
-        cliente.setAdicionadoEm(LocalDateTime.now());
+        //cliente.setAdicionadoEm(LocalDateTime.now());
         cliente.setCpf("111.222.333-44");
         cliente.setEmail("cliente@email.com.br");
         cliente.setGenero(Genero.M);
