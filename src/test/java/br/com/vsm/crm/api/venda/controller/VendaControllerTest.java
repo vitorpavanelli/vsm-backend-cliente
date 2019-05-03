@@ -38,7 +38,7 @@ public class VendaControllerTest extends CrmTest {
         Venda venda = new Venda();
 
         HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                 HttpMethod.POST, entity, CustomHttpResponse.class);
         CustomHttpResponse customHttpResponse = response.getBody();
 
@@ -58,7 +58,7 @@ public class VendaControllerTest extends CrmTest {
         venda.setCliente(cliente);
 
         HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                 HttpMethod.POST, entity, CustomHttpResponse.class);
         CustomHttpResponse customHttpResponse = response.getBody();
 
@@ -78,7 +78,7 @@ public class VendaControllerTest extends CrmTest {
         venda.setCliente(cliente);
 
         HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                 HttpMethod.POST, entity, CustomHttpResponse.class);
         CustomHttpResponse customHttpResponse = response.getBody();
 
@@ -98,7 +98,7 @@ public class VendaControllerTest extends CrmTest {
         venda.setCliente(cliente);
 
         HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                 HttpMethod.POST, entity, CustomHttpResponse.class);
         CustomHttpResponse customHttpResponse = response.getBody();
 
@@ -118,7 +118,7 @@ public class VendaControllerTest extends CrmTest {
         venda.setCliente(cliente);
 
         HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+        ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                 HttpMethod.POST, entity, CustomHttpResponse.class);
         CustomHttpResponse customHttpResponse = response.getBody();
 
@@ -141,11 +141,11 @@ public class VendaControllerTest extends CrmTest {
         vendaRepository.deleteAll();
         for (int index = 0; index < 4; index++) {
             HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-            restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+            restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                     HttpMethod.POST, entity, CustomHttpResponse.class);
         }
 
-        String _URL = "/api/v1/crm/venda/filtro/periodo/2019-05-03/2019-05-06";
+        String _URL = "/api/crm/venda/filtro/periodo/2019-05-03/2019-05-06";
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<VendaResponseWrapper> responseEntity = restTemplate.exchange(_HOST + port + _URL,
                 HttpMethod.GET, entity, VendaResponseWrapper.class);
@@ -173,11 +173,11 @@ public class VendaControllerTest extends CrmTest {
             venda.setCliente(cliente);
 
             HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
-            restTemplate.exchange(_HOST + port + "/api/v1/crm/venda/incluir",
+            restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                     HttpMethod.POST, entity, CustomHttpResponse.class);
         }
 
-        String _URL = "/api/v1/crm/venda//filtro/quantidadevendas/groupedbygenero/2019-05-03/2019-05-06";
+        String _URL = "/api/crm/venda//filtro/quantidadevendas/groupedbygenero/2019-05-03/2019-05-06";
         HttpEntity entity = new HttpEntity(headers);
         ResponseEntity<VendaResponseWrapper> responseEntity = restTemplate.exchange(_HOST + port + _URL,
                 HttpMethod.GET, entity, VendaResponseWrapper.class);

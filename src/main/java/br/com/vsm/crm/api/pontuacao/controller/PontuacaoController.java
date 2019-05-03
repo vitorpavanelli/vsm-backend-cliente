@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/api/v1/crm/cliente/pontuacao")
+@RequestMapping(value = "/api/crm/cliente/pontuacao")
 public class PontuacaoController {
 
     @Autowired

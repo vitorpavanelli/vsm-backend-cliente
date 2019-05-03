@@ -83,7 +83,7 @@ class SecurityFilter implements Filter {
 
                     String _URI = request.getRequestURI().substring(0, request.getRequestURI().lastIndexOf("/"));
                     String access = accessGrants.getAccesses().stream()
-                            .filter(item -> "/api/v1/admin/access".equals(item))
+                            .filter(item -> "/api/admin/access".equals(item))
                             .findAny()
                             .orElse(null);
 
