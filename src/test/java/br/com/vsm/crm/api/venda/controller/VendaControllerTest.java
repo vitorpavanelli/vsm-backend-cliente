@@ -120,6 +120,7 @@ public class VendaControllerTest extends CrmTest {
         HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
         ResponseEntity<CustomHttpResponse> response = restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                 HttpMethod.POST, entity, CustomHttpResponse.class);
+
         CustomHttpResponse customHttpResponse = response.getBody();
 
         assertEquals("Pontos: 30", customHttpResponse.getMessage());
@@ -128,26 +129,41 @@ public class VendaControllerTest extends CrmTest {
 
     @Test
     public void findByPeriod() {
-        Venda venda = new Venda();
-        venda.setOcorrencia(LocalDateTime.now());
-        venda.setDiaOcorrencia(LocalDate.now());
-        venda.setReferenciaPdv(new Random().nextLong());
-        venda.setValor(10.80f);
-
-        Cliente cliente = new Cliente();
-        cliente.setId(_DEFAULT_CLIENT_ID_M);
-        venda.setCliente(cliente);
-
         vendaRepository.deleteAll();
-        for (int index = 0; index < 4; index++) {
+        for (int index = 0; index < 8; index++) {
+            Venda venda = new Venda();
+            if (index == 0 || index == 1) {
+                venda.setOcorrencia(LocalDateTime.now().minusDays(2));
+                venda.setDiaOcorrencia(LocalDate.now().minusDays(2));
+
+            } else if (index == 2 || index == 3) {
+                venda.setOcorrencia(LocalDateTime.now().plusDays(2));
+                venda.setDiaOcorrencia(LocalDate.now().plusDays(2));
+
+            } else {
+                venda.setOcorrencia(LocalDateTime.now());
+                venda.setDiaOcorrencia(LocalDate.now());
+            }
+
+            venda.setReferenciaPdv(new Random().nextLong());
+            venda.setValor(10.80f);
+
+            Cliente cliente = new Cliente();
+            cliente.setId(_DEFAULT_CLIENT_ID_M);
+            venda.setCliente(cliente);
+
             HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
             restTemplate.exchange(_HOST + port + "/api/crm/venda/incluir",
                     HttpMethod.POST, entity, CustomHttpResponse.class);
         }
 
-        String _URL = "/api/crm/venda/filtro/periodo/2019-05-03/2019-05-06";
+        StringBuilder urlBuilder = new StringBuilder("/api/crm/venda/filtro/periodo/");
+        urlBuilder.append(LocalDate.now().format(formatter))
+                .append("/")
+                .append(LocalDate.now().format(formatter));
+
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<VendaResponseWrapper> responseEntity = restTemplate.exchange(_HOST + port + _URL,
+        ResponseEntity<VendaResponseWrapper> responseEntity = restTemplate.exchange(_HOST + port + urlBuilder.toString(),
                 HttpMethod.GET, entity, VendaResponseWrapper.class);
 
         VendaResponseWrapper wrapper = responseEntity.getBody();
@@ -169,7 +185,7 @@ public class VendaControllerTest extends CrmTest {
             venda.setValor(10.80f);
 
             Cliente cliente = new Cliente();
-            cliente.setId(index <= 1 ? _DEFAULT_CLIENT_ID_M : _DEFAULT_CLIENT_ID_F);
+            cliente.setId(index == 0 ? _DEFAULT_CLIENT_ID_M : _DEFAULT_CLIENT_ID_F);
             venda.setCliente(cliente);
 
             HttpEntity<Venda> entity = new HttpEntity<>(venda, headers);
@@ -177,16 +193,20 @@ public class VendaControllerTest extends CrmTest {
                     HttpMethod.POST, entity, CustomHttpResponse.class);
         }
 
-        String _URL = "/api/crm/venda//filtro/quantidadevendas/groupedbygenero/2019-05-03/2019-05-06";
+        StringBuilder urlBuilder = new StringBuilder("/api/crm/venda//filtro/quantidadevendas/groupedbygenero/");
+        urlBuilder.append(LocalDate.now().format(formatter))
+                .append("/")
+                .append(LocalDate.now().format(formatter));
+
         HttpEntity entity = new HttpEntity(headers);
-        ResponseEntity<VendaResponseWrapper> responseEntity = restTemplate.exchange(_HOST + port + _URL,
+        ResponseEntity<VendaResponseWrapper> responseEntity = restTemplate.exchange(_HOST + port + urlBuilder.toString(),
                 HttpMethod.GET, entity, VendaResponseWrapper.class);
 
         VendaResponseWrapper wrapper = responseEntity.getBody();
         Map<Genero, Integer> vendas = wrapper.getQuantidade();
 
         assertNotNull(vendas);
-        assertEquals(2, vendas.get(Genero.F).intValue());
-        assertEquals(2, vendas.get(Genero.M).intValue());
+        assertEquals(3, vendas.get(Genero.F).intValue());
+        assertEquals(1, vendas.get(Genero.M).intValue());
     }
 }

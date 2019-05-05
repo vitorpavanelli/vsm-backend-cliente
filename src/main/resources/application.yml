@@ -1,6 +1,6 @@
 app:
   name: crm-cliente
-  dist: dev
+  dist: test
 
 auth:
   server1: http://localhost:8080/api/gateway/security-check
@@ -16,15 +16,21 @@ logging:
 server:
   port: 8081
 
+test:
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente_test?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Sao_Paulo&useLegacyDatetimeCode=false
+    username: vsm_crm
+    password: Vsm_Crm_Admin_1!
+
 dev:
   datasource:
-    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente_test?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente_dev?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Sao_Paulo&useLegacyDatetimeCode=false
     username: vsm_crm
     password: Vsm_Crm_Admin_1!
 
 prod:
   datasource:
-    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC
+    jdbc-url: jdbc:mysql://localhost:3306/vsm_crm_cliente?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/Sao_Paulo&useLegacyDatetimeCode=false
     username: vsm_crm
     password: Vsm_Crm_Admin_1!
 

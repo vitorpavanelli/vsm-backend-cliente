@@ -13,21 +13,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
+//@DirtiesContext
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@TestPropertySource(locations = "classpath:application.yml")
+//@TestPropertySource(locations = "classpath:application-test.yml")
 public abstract class CrmTest {
 
     protected static Long _DEFAULT_CLIENT_ID_F = 1L;
     protected static Long _DEFAULT_CLIENT_ID_M = 2L;
 
     protected static String _HOST;
+
+    protected static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Autowired
     protected TestRestTemplate restTemplate;
