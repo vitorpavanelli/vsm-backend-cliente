@@ -26,6 +26,8 @@ public class Venda {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = CustomDateDeserializer._DATE_TIME_PATTERN)
     @JsonDeserialize(using = CustomDateDeserializer.class)
+//    @Column(columnDefinition = "DATE")
+//    @Basic
     private LocalDate diaOcorrencia;
 
     private Long referenciaPdv;

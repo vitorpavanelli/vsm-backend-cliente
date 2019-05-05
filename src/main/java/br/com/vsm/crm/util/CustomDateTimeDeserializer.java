@@ -12,7 +12,7 @@ public class CustomDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
 
     public static final String _DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(_DATE_TIME_PATTERN);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(_DATE_TIME_PATTERN);
 
     public CustomDateTimeDeserializer() {
         this(null);

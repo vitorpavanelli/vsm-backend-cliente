@@ -6,8 +6,16 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
+
 @SpringBootApplication
 public class CrmClienteApplication {
+
+//	@PostConstruct
+//	public void init(){
+//		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+//	}
 
 	@Bean
 	public RestTemplate getRestTemplate(RestTemplateBuilder builder) {
