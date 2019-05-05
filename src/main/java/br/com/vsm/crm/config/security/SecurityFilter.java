@@ -2,6 +2,8 @@ package br.com.vsm.crm.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.*;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
+@ConditionalOnExpression("{'prod', 'dev'}.contains('${app.dist}')")
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 class SecurityFilter implements Filter {

@@ -42,7 +42,7 @@ public class MySQLDbConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean primaryEntityManager() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource("prod".equals(env) ? prodDataSource() : devDataSource());
+        em.setDataSource(getDataSource());
         em.setPackagesToScan(new String[] {
                 "br.com.vsm.crm.api.cliente.repository",
                 "br.com.vsm.crm.api.pontuacao.repository",
@@ -57,9 +57,15 @@ public class MySQLDbConfig {
         properties.put("hibernate.show_sql", "false");
         properties.put("hibernate.use_sql_comments", "true");
         properties.put("hibernate.id.new_generator_mappings", "false");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+//        properties.put("hibernate.jdbc.time_zone", "UTC");
         em.setJpaPropertyMap(properties);
 
         return em;
+    }
+
+    private HikariDataSource getDataSource() {
+        return  "prod".equals(env) ? prodDataSource() : "dev".equals(env) ? devDataSource() : testDataSource();
     }
 
     @Primary
@@ -81,6 +87,17 @@ public class MySQLDbConfig {
             havingValue = "dev"
     )
     public HikariDataSource devDataSource() {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
+    }
+
+    @Primary
+    @Bean
+    @ConfigurationProperties("test.datasource")
+    @ConditionalOnProperty(
+            name = "app.dist",
+            havingValue = "test"
+    )
+    public HikariDataSource testDataSource() {
         return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
