@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface VendaRepository extends PagingAndSortingRepository<Venda, Long> {
 
-    @Query("select v from Venda v where :inicio >= v.diaOcorrencia and v.diaOcorrencia <= :fim")
+    @Query("select v from Venda v where v.diaOcorrencia >= :inicio and v.diaOcorrencia <= :fim")
     List<Venda> findByPeriod(@Param("inicio") LocalDate inicio, @Param("fim") LocalDate fim);
 }
