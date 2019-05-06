@@ -52,7 +52,7 @@ public class MySQLDbConfig {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         HashMap<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "prod".equals(env) ? "none" : "create");
+        properties.put("hibernate.hbm2ddl.auto", "prod".equals(env) ? "none" : "dev".equals(env) ? "none" : "none");
         properties.put("hibernate.format_sql", "true");
         properties.put("hibernate.show_sql", "false");
         properties.put("hibernate.use_sql_comments", "true");
